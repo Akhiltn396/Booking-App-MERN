@@ -1,0 +1,85 @@
+.navbar{
+    height: 70px;
+    background-color:  #EF251F;
+    display: flex;
+    justify-content: center;
+
+
+    .navContainer{
+        width: 100%;
+        max-width: 1024px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 248px;
+        position: relative;
+
+
+        .logo{
+           font-size: larger;
+    }
+    .navItems{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: absolute;
+        right: -250px;
+        .items{
+            display: flex;
+            gap: 120px;
+
+        }
+        .buttondiv{
+            position: absolute;
+            top:25px;
+            right:0px;
+       .btn{
+
+        display: flex;
+        justify-content: end;
+        gap: 10px;
+        border: none;
+        padding: 5px 10px;
+
+
+        .register{
+            font-weight: 800;
+            font-size: 12px;
+            border-radius: 10%;
+            border: 1px solid white;
+            cursor: pointer;
+
+
+        }
+        .login{
+            font-weight: 800;
+            font-size: 12px;
+            border: 1px solid white;
+            border-radius: 10%;
+
+            cursor: pointer;
+
+        }
+         }
+        }
+        .logOutItem{
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            .LogoutBtn{
+        position: absolute;
+        top: -6px;
+        right: 50px;
+              color: white;
+              background-color: red;
+              border: 2px solid white;
+              border-radius: 5px;
+              padding: 0px 15px;
+              font-weight: 800;
+                       }
+          }
+
+    }
+    }
+}

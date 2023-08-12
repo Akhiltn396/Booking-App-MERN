@@ -1,0 +1,33 @@
+.trending-list{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+.trending{
+position: relative;
+color: white;
+border-radius: 10px;
+overflow: hidden;
+height: 250px;
+width: 250px;
+
+    .trendingImg{
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+    }
+    .trendingTitles{
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+    }
+
+}
+@media (max-width: 500px) {
+   width: 50%;
+    }
+}
