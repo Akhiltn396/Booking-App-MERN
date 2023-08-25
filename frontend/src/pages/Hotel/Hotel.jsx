@@ -23,7 +23,6 @@ const Hotel = () => {
   const { data, loading, error, reFetch } = useFetch(
     `http://localhost:3003/api/hotels/single/${id}`
   );
-
   const { dates, options } = useSelector((state) => state.search);
   const { user } = useSelector((state) => state.auth);
 
@@ -96,7 +95,7 @@ const Hotel = () => {
             <button className="bookNow" onClick={handleClick}>
               Reserve or Book Now!
             </button>
-            <h1 className="hotelTitle">{data.name}</h1>
+            <h1 className="hotelTitle">{data.hotelName}</h1>
             <div className="hotelAddress">
               <LocationOnIcon />
               <span>{data.address}</span>

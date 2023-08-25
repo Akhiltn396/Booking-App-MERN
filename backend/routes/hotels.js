@@ -8,6 +8,7 @@ const {
   getSingleHotel,
   countByCity,
   countByType,
+  getAdminHotel,
 } = require("../controllers/hotelController");
 const { verifyAdmin, verifyToken } = require("../utils/verifyToken");
 // const {verifyAdmin} = require("../utils/verifyToken")
@@ -29,6 +30,11 @@ router.get("/", getHotel);
 //Get a single hotel
 
 router.get("/single/:id", getSingleHotel);
+
+//Get admin Hotel
+router.get("/admin/hotels",verifyAdmin, getAdminHotel);
+
+
 
 router.get("/countByCity",countByCity)
 router.get("/countByType",countByType)

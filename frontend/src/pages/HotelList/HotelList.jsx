@@ -18,13 +18,15 @@ const List = () => {
   const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
+  const [city, setCity] = useState(destination);
+
 
   // const dates = useSelector(state=>state.search.dates);
 
 // console.log(dates);
 
 
-  const {data,loading,error,reFetch} = useFetch(`http://localhost:3003/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1000}`)
+  const {data,loading,error,reFetch} = useFetch(`http://localhost:3003/api/hotels?city=${city}&min=${min || 0}&max=${max || 1000}`)
 
   const handleClick = () =>{
 reFetch()
@@ -38,7 +40,7 @@ reFetch()
             <h1 className="listTitle">Search</h1>
             <div className="listItem">
               <label>Destination</label>
-              <input placeholder={destination} type="text" />
+              <input placeholder={destination} type="text" onChange={(e)=>setCity(e.target.value)} />
             </div>
             <div className="listItem">
               <label>Check-in Date</label>

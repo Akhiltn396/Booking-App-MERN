@@ -2,15 +2,19 @@ const Hotels = require("../models/Hotel");
 const Room = require("../models/Room");
 
 
-const createRoom = async(req,res)=>{
-    const hotelId = req.params.id;
-    const newRoom = new Room(req.body)
+const createRoom = async(req,res,next)=>{
+    const hotelId = req.params.hotelid;
+    const newRoom = new Room({
+      ...req.body,
+      hotelId:hotelId
+    }
+      )
 
     try {
         const savedRoom = await newRoom.save()
 
-        await Hotels.findByIdAndUpdate(hotelId,{
-            $push:{rooms: savedRoom._id}
+       const newData =  await Hotels.findByIdAndUpdate(hotelId,{
+            $push:{rooms: savedRoom._id.toString()}
         })
         res.status(200).json(savedRoom)
     } catch (error) {
@@ -77,7 +81,9 @@ const updateRoom = async (req, res, next) => {
 
   const getRooms = async (req, res, next) => {
     try {
-      const rooms = await Room.find();
+      const id = req.params.hotelid
+
+      const rooms = await Room.find({hotelId:id});
       res.status(200).json(rooms);
     } catch (err) {
       next(err);

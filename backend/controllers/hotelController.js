@@ -2,39 +2,28 @@ const express = require("express");
 const Hotels = require("../models/Hotel");
 const createError = require("../utils/createErr");
 const multer = require("multer");
-
-const Storage = multer.diskStorage({
-  destination: "uploads",
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({
-  storage: Storage,
-}).single("photos");
+const User = require("../models/User");
 
 const createHotel = async (req, res) => {
   try {
-    // upload(req, res, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     const newImg = new Hotels({
-    //       photos: {
-    //         data: req.file.filename,
-    //         contentType: "image/png",
-    //       },
-    //     });
-    //     // newImg
-    //       // .save()
-    //       // .then(() => res.send("success img"))
-    //       // .catch((err) => console.log(err));
-    //   }
-    // });
-    const newHotel = new Hotels(req.body);
+    const newHotel = await Hotels.create({
+      ...req.body,
+      hotelOwnerId: req.user.id,
+    });
+
+    const id = req.user.id;
 
     const saveHotel = await newHotel.save();
+    console.log(saveHotel._id.toString());
+    await User.findByIdAndUpdate(
+         req.user.id ,
+      {
+        $set: {
+          hotels: saveHotel._id.toString(),
+        },
+      },
+      { new: true }
+    );
 
     res.json(saveHotel);
   } catch (error) {
@@ -65,13 +54,15 @@ const deleteHotel = async (req, res) => {
 };
 
 const getHotel = async (req, res, next) => {
-  const { min, max, city } = req.query;
+  let { min, max, city } = req.query;
+
   const mini = parseInt(min);
   const maxi = parseInt(max);
 
+
   try {
     const hotels = await Hotels.find({
-      city: { $regex: city, $options: "I" },
+      city: { $regex: city ? city : "", $options: "i" }, //regex means if data coming from the city...if any datas similar to city then it will display it
       cheapestPrice: { $gt: mini || 1, $lt: maxi || 999 },
     }).limit(3);
     res.status(200).json(hotels);
@@ -94,6 +85,20 @@ const getSingleHotel = async (req, res, next) => {
   }
 };
 
+
+const getAdminHotel = async (req,res,next) =>{
+  try {
+
+    const Hotel = await Hotels.find({hotelOwnerId : req.user.id}).limit(4)
+
+    res.status(200).json(Hotel)
+
+  } catch (error) {
+
+    // next(createError(500,"Admin Hotel Data Failed"))
+    console.log(error);
+  }
+}
 const countByCity = async (req, res, next) => {
   const cities = req.query.cities.split(",");
   try {
@@ -134,6 +139,7 @@ module.exports = {
   deleteHotel,
   getHotel,
   getSingleHotel,
+  getAdminHotel,
   countByCity,
   countByType,
 };

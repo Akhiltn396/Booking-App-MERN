@@ -17,6 +17,6 @@ router.delete("/:id/:hotelid", verifyAdmin, deleteRoom);
 router.get("/:id", getRoom);
 //GET ALL
 
-router.get("/", getRooms);
+router.get("/rooms/:hotelid", getRooms);
 
 module.exports = router

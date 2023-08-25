@@ -39,6 +39,7 @@ const Header = ({ list }) => {
     room: 1,
   });
 
+
   const handleOption = (name, operation) => {
     setOptions((prev) => {
       return {

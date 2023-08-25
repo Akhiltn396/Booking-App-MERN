@@ -6,13 +6,14 @@ const  authRoute  = require("./routes/auth")
 const  userRoute  = require("./routes/users")
 const  hotelRoute  = require("./routes/hotels")
 const  roomRoute  = require("./routes/rooms")
+const paymentRoute = require("./routes/payment")
 
 const app = express()
 const dotenv = require("dotenv").config()
 var cors = require('cors');
 
 
-app.use(cors({origin:"http://localhost:3000",credentials:true}))
+app.use(cors({origin:"http://localhost:3001",credentials:true}))
 
 app.use(express.json())
 app.use(cookieParser())
@@ -33,6 +34,7 @@ app.use("/api/auth",authRoute)
 app.use("/api/users",userRoute)
 app.use("/api/hotels",hotelRoute)
 app.use("/api/rooms",roomRoute)
+app.use("/api/payment",paymentRoute)
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server started at port number ${process.env.PORT}`);

@@ -10,7 +10,7 @@ import {
   loginSuccess,
 } from "../../components/redux/authSlice";
 import { loginUser } from "../../components/redux/loginUser";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -32,12 +32,10 @@ const Login = () => {
   const [dataset, setDataset] = useState("");
   const [errorData, setError] = useState("");
 
-  console.log(dataset);
   const dispatch = useDispatch();
   const navigate = useNavigate("/");
 
   const { user, error, loading, message } = useSelector((state) => state.auth);
-  console.log("error", message);
 
   const handleChange = (e) => {
     setCredentials((prev) => ({
@@ -68,9 +66,10 @@ const Login = () => {
       const password = credentials.password;
 
       const res = await axios
-        .post("http://localhost:3003/api/auth/login", { username, password })
+        .post("http://localhost:3003/api/auth/login", { username, password }, {
+        withCredentials: true})
         .then(function (response) {
-          console.log(response);
+          console.log("Login response",response);
           dispatch(loginSuccess({ payload: response.data.details }));
           navigate("/");
         })
@@ -183,9 +182,9 @@ const Login = () => {
                 }
                 <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                   Don't have an account?{" "}
-                  <a href="#!" style={{ color: "#393f81" }}>
-                    Register here
-                  </a>
+                  <Link to={"/register"} style={{ color: "#393f81" }}>
+                   Register here
+                  </Link>
                 </p>
 
                 <div className="d-flex flex-row justify-content-start">

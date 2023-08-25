@@ -1,0 +1,52 @@
+.hotels {
+  .listContainer {
+    display: flex;
+
+    .listWrapper {
+      flex: 1;
+      .listSearch{
+        width: 435px;
+
+      }
+
+    }
+    .rooms-section {
+      display: flex;
+
+      flex: 3;
+      .container {
+        display: flex;
+
+        .data-img{
+            height: 40vh;
+            width: 40vh;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hotels {
+    height: max-content;
+    .listContainer {
+      position: relative;
+.listWrapper {
+position: absolute;
+top: 10px;
+padding: 10px 10px;
+width: 98%;
+.searchItem{
+  display: none;
+}
+
+}
+ .rooms-section {
+  z-index: -1;
+flex-wrap: wrap;
+
+ }
+    }
+  }
+
+}

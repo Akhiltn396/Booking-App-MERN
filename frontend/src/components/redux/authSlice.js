@@ -6,16 +6,20 @@ export const authSlice = createSlice({
        user: localStorage.getItem("user") || null,
        loading:false,
        error:false,
-       message:""
+       message:"",
+       isAuthenticated:false,
 
     },
     reducers:{
         loginStart:(state) =>{
-            state.loading = true;
+            state.loading = false;
+
         },
         loginSuccess:(state,action) =>{
             state.user = action.payload;
             state.loading = false;
+            state.isAuthenticated = true;
+
 
 
         },
@@ -26,8 +30,12 @@ export const authSlice = createSlice({
         },
         logOut:(state)=>{
             state.user = null
-            // state.loading = false,
             // state.error = false
+            state.isAuthenticated = false;
+
+
+
+
 
         },
     }

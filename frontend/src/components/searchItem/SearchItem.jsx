@@ -5,7 +5,7 @@ const SearchItem = ({item}) => {
   return (
     <div className="searchItem">
       <img
-        src={item.photos}
+        src={item.photos[0]}
         alt=""
         className="siImg"
       />
@@ -14,7 +14,7 @@ const SearchItem = ({item}) => {
         <span className="siDistance">{item.distance}</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
-          Studio Apartment with Air conditioning
+          Hotel
         </span>
         <span className="siFeatures">
           {item.desc}
