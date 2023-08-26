@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 
 
-const db = mongoose.connect(process.env.MONGO_URL,{useNewUrlParser:true},{useUnifiedTopology:true})
+const db = mongoose.connect(process.env.MONGO_CONNECTION_URL,{useNewUrlParser:true},{useUnifiedTopology:true})
 .then((data)=>{
     console.log(`Db connected successfully`)
 }).catch((err)=>{
